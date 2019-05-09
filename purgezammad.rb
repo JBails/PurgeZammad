@@ -17,6 +17,7 @@ ticketless_customers.find_each.with_index do |user, i|
     rescue => e
       puts "  #{display_name} could not be deleted: #{e.message}"
       raise ActiveRecord::Rollback
+    next
     end
   end
 end
