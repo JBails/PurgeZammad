@@ -9,16 +9,7 @@ ticketless_customers.find_each.with_index do |user, i|
   next if user.id == 1
 
   display_name = user.fullname + (user.fullname == user.email ? '' : " (#{user.email})")
-  print "[#{i.next}/#{count}] Delete customer #{display_name}? [y/N]"
-
-  answer = STDIN.getch
-  puts
-
-  if answer != 'y'
-    puts "  Skipping #{display_name}"
-    next
-  end
-
+  
   User.transaction do
     begin
       user.destroy!
