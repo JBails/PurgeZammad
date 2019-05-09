@@ -17,7 +17,7 @@ ticketless_customers.find_each.with_index do |user, i|
   puts
 
   if answer != 'y'
-    puts "  Skipping #{display_name}"
+    puts "  Skipping user #{display_name}"
     next
   end
 
