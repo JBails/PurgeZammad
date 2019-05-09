@@ -1,4 +1,4 @@
-ticketless_customers = User.with_permissions('ticket.customer').where(''title NOT LIKE ?', '%mapway.com%'').where(''title NOT LIKE ?', '%mxdata.co.uk%'').where('id NOT IN (SELECT customer_id FROM tickets)')
+ticketless_customers = User.with_permissions('ticket.customer').where('title NOT LIKE ?', '%mapway.com%').where('title NOT LIKE ?', '%mxdata.co.uk%').where('id NOT IN (SELECT customer_id FROM tickets)')
 count = ticketless_customers.count
 
 puts "#{count} customers without tickets found."
