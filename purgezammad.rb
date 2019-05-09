@@ -11,7 +11,7 @@ ticketless_customers.find_each.with_index do |user, i|
   display_name = user.fullname + (user.fullname == user.email ? '' : " (#{user.email})")
   print "[#{i.next}/#{count}] Delete customer #{display_name}? [y/N]"
 
-  answer = STDIN
+  answer = STDIN.getch
   puts
 
   if answer != 'y'
