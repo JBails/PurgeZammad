@@ -11,16 +11,7 @@ ticketless_customers.find_each.with_index do |user, i|
   next if user.id == 1
 
   display_name = user.fullname + (user.fullname == user.email ? '' : " (#{user.email})")
-  print "[#{i.next}/#{count}] Delete customer #{display_name}? [y/N]"
-
-  answer = STDIN
-  puts
-
-  if answer != 'y'
-    puts "  Skipping #{display_name}"
-    next
-  end
-
+  
   User.transaction do
     begin
       user.destroy!
@@ -28,24 +19,7 @@ ticketless_customers.find_each.with_index do |user, i|
     rescue => e
       puts "  #{display_name} could not be deleted: #{e.message}"
       raise ActiveRecord::Rollback
+   next
     end
   end
 end
-
-#ticketless_customers.find_each.with_index do |user, i|
-#  next if user.permissions?(%w[admin ticket.agent])
-#  next if user.id == 1
-#
-#  display_name = user.fullname + (user.fullname == user.email ? '' : " (#{user.email})")
-#  
-#  User.transaction do
-#    begin
-#      user.destroy!
-#      puts "  #{display_name} deleted."
-#    rescue => e
-#      puts "  #{display_name} could not be deleted: #{e.message}"
-#      raise ActiveRecord::Rollback
-#   next
-#    end
-#  end
-#end
